@@ -12,7 +12,7 @@ This app checks for open ports on a range of targets, if supported (FTP/SSH Only
  - Email Alerting
 
 # Installation
-cd /opt && git clone https://github.com/sysvar/sans.git && chmod +x /opt/sans/setup.sh && /opt/sans/setup.sh
+cd /opt && git clone https://github.com/sysvar/sans.git && cd /opt/sans && chmod +x /opt/sans/setup.sh && /opt/sans/setup.sh
 
 then...
 configure the sans.py configuration section for database, web and email.
