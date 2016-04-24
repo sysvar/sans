@@ -53,7 +53,7 @@ if [ "$key" = '' ]; then
 	printf "DATABASE 2: Create sans database /n"
 	mysql -u root -p -e 'CREATE DATABASE sans;'
 	printf "DATABASE 3: Import Database /n"
-	mysqldump -u root -p sans < database.sql
+	mysql -u root -p sans < database.sql
 	printf "\n"
 	
 	printf "\033[92m   MANUAL PART \033[0m \n"
