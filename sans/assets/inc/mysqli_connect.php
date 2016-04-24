@@ -1,6 +1,6 @@
 <?php
     // Defined as constants so that they can't be changed
-    DEFINE ('DB_USER', 'sans');
+    DEFINE ('DB_USER', 'root');
     DEFINE ('DB_PASSWORD', 'sans');
     DEFINE ('DB_HOST', '127.0.0.1');
     DEFINE ('DB_NAME', 'sans');

@@ -1,23 +1,24 @@
 <?php require('./assets/inc/mysqli_connect.php'); 
 
 // Clear Database
+$query0 = "USE sans";
 $query1 = "DROP TABLE `banners`, `ports_scan`, `scan`, `ports`;";
-$query2 = "CREATE TABLE IF NOT EXISTS `scanner`.`scan` (`scn_id` int(5) NOT NULL AUTO_INCREMENT,`scn_date` date NOT NULL, PRIMARY KEY (`scn_id`)) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-$query3 = "CREATE TABLE IF NOT EXISTS `scanner`.`ports` (`por_id` int(16) NOT NULL AUTO_INCREMENT,`por_ip` varchar(15) NOT NULL,`por_port` int(5) NOT NULL,`por_status` tinyint(1) NOT NULL,`por_probe` 
+$query2 = "CREATE TABLE IF NOT EXISTS `sans`.`scan` (`scn_id` int(5) NOT NULL AUTO_INCREMENT,`scn_date` date NOT NULL, PRIMARY KEY (`scn_id`)) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_unicode_ci;";
+$query3 = "CREATE TABLE IF NOT EXISTS `sans`.`ports` (`por_id` int(16) NOT NULL AUTO_INCREMENT,`por_ip` varchar(15) NOT NULL,`por_port` int(5) NOT NULL,`por_status` tinyint(1) NOT NULL,`por_probe` 
            timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (`por_id`)) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-$query4 = "CREATE TABLE IF NOT EXISTS `scanner`.`ports_scan` (`por_scn_id` int(16) NOT NULL AUTO_INCREMENT,`por_id` int(16) NOT NULL,`scn_id` int(5) NOT NULL, PRIMARY KEY (`por_scn_id`)) 
+$query4 = "CREATE TABLE IF NOT EXISTS `sans`.`ports_scan` (`por_scn_id` int(16) NOT NULL AUTO_INCREMENT,`por_id` int(16) NOT NULL,`scn_id` int(5) NOT NULL, PRIMARY KEY (`por_scn_id`)) 
            ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-$query5 = "CREATE TABLE IF NOT EXISTS `scanner`.`banners` (`scn_id` int(5) NOT NULL,`por_ip` varchar(15) NOT NULL,`por_port` int(5) NOT NULL,`ban_banner` varchar(255) NOT NULL, 
+$query5 = "CREATE TABLE IF NOT EXISTS `sans`.`banners` (`scn_id` int(5) NOT NULL,`por_ip` varchar(15) NOT NULL,`por_port` int(5) NOT NULL,`ban_banner` varchar(255) NOT NULL, 
            PRIMARY KEY (`scn_id`, `por_ip`, `por_port`)) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_unicode_ci;";
-$query6 = "CREATE TRIGGER `Update port_scan table por_id and scan date id` AFTER INSERT ON `scanner`.`ports` FOR EACH ROW INSERT INTO `ports_scan` (`por_scn_id`,`por_id`,`scn_id`) 
+$query6 = "CREATE TRIGGER `Update port_scan table por_id and scan date id` AFTER INSERT ON `sans`.`ports` FOR EACH ROW INSERT INTO `ports_scan` (`por_scn_id`,`por_id`,`scn_id`) 
            VALUES (NULL,(SELECT MAX(`por_id`) FROM `ports`), (SELECT `scn_id` FROM `scan` WHERE `scn_date` = CURDATE()));";
-$query7 = "CREATE TRIGGER `Update scan table with new date` BEFORE INSERT ON `scanner`.`ports` FOR EACH ROW INSERT INTO scan (scn_id, scn_date) SELECT (COALESCE(MAX(scn_id),0)+1), CURDATE() 
+$query7 = "CREATE TRIGGER `Update scan table with new date` BEFORE INSERT ON `sans`.`ports` FOR EACH ROW INSERT INTO scan (scn_id, scn_date) SELECT (COALESCE(MAX(scn_id),0)+1), CURDATE() 
            FROM scan HAVING COUNT(CASE WHEN scan.scn_date = CURDATE() THEN 1 end) = 0;";
-$query8 = "ALTER TABLE `scanner`.`ports` ADD INDEX `index_ip` (`por_ip`);";
-$query9 = "ALTER TABLE `scanner`.`ports` ADD INDEX `index_port` (`por_port`);";
-$query10 = "ALTER TABLE `scanner`.`banners` ADD CONSTRAINT `id2` FOREIGN KEY (`scn_id`) REFERENCES `scanner`.`scan`(`scn_id`) ON DELETE CASCADE ON UPDATE CASCADE; ALTER TABLE `scanner`.`banners` 
-            ADD CONSTRAINT `ip1` FOREIGN KEY (`por_ip`) REFERENCES `scanner`.`ports`(`por_ip`) ON DELETE CASCADE ON UPDATE CASCADE; ALTER TABLE `scanner`.`banners` ADD CONSTRAINT `por1` FOREIGN KEY
-           (`por_port`) REFERENCES `scanner`.`ports`(`por_port`) ON DELETE CASCADE ON UPDATE CASCADE;";
+$query8 = "ALTER TABLE `sans`.`ports` ADD INDEX `index_ip` (`por_ip`);";
+$query9 = "ALTER TABLE `sans`.`ports` ADD INDEX `index_port` (`por_port`);";
+$query10 = "ALTER TABLE `sans`.`banners` ADD CONSTRAINT `id2` FOREIGN KEY (`scn_id`) REFERENCES `sans`.`scan`(`scn_id`) ON DELETE CASCADE ON UPDATE CASCADE; ALTER TABLE `sans`.`banners` 
+            ADD CONSTRAINT `ip1` FOREIGN KEY (`por_ip`) REFERENCES `sans`.`ports`(`por_ip`) ON DELETE CASCADE ON UPDATE CASCADE; ALTER TABLE `sans`.`banners` ADD CONSTRAINT `por1` FOREIGN KEY
+           (`por_port`) REFERENCES `sans`.`ports`(`por_port`) ON DELETE CASCADE ON UPDATE CASCADE;";
 ?>
 <!doctype html>
 <html>
@@ -128,7 +129,7 @@ $query10 = "ALTER TABLE `scanner`.`banners` ADD CONSTRAINT `id2` FOREIGN KEY (`s
                                         echo $errortext;
                                     }
                                     // Run database reset query   
-                                    if ($error == false and !empty($hosts) and !empty($ports) and !empty($timeout) and !empty($threading)) {    
+                                    if ($error == false and !empty($hosts) and !empty($ports) and !empty($timeout) and !empty($threading)) {    @mysqli_query($dbc, $query0);
                                         @mysqli_query($dbc, $query1);
                                         @mysqli_query($dbc, $query2);
                                         @mysqli_query($dbc, $query3);
@@ -262,6 +263,7 @@ $query10 = "ALTER TABLE `scanner`.`banners` ADD CONSTRAINT `id2` FOREIGN KEY (`s
 
                                     if ($error2 == false) { 
                                         // Run database reset query 
+										@mysqli_query($dbc, $query0);
                                         @mysqli_query($dbc, $query1);
                                         @mysqli_query($dbc, $query2);
                                         @mysqli_query($dbc, $query3);

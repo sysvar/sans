@@ -30,7 +30,7 @@ printf "\n"
 read -n1 -r -p "Press SPACE or ENTER to continue otherwise press anything else to exit" key
 
 if [ "$key" = '' ]; then
-    printf "\033[92m   Setup Initiated... \033[0m \n"
+    printf "\033[92mSetup Initiated... \033[0m \n"
 	apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
 	add-apt-repository 'deb [arch=amd64,i386] http://lon1.mirrors.digitalocean.com/mariadb/repo/10.1/debian jessie main'
 	apt-get update
@@ -45,7 +45,7 @@ if [ "$key" = '' ]; then
 	sed -i 's:upload_max_filesize = 2M:upload_max_filesize = 10M:g' /etc/php5/apache2/php.ini
 	printf "\n"
 	
-	printf "\033[92m   Database, take time to type correctly \033[0m \n"
+	printf "\033[92mDatabase password, take time to type correctly \033[0m \n"
 	printf "DATABASE 1: Set a high number of database connections /n"
 	printf "\n"
 	mysql -u root -p -e 'set global max_connections = 9999;'
