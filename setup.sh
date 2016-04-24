@@ -12,7 +12,7 @@ printf "\n"
 printf "\033[91m   This script will install the following software \033[0m"
 printf "
     - apache2
-	- php5
+    - php5
     - mariadb
     - phpmyadmin
     - python2.7
@@ -54,20 +54,20 @@ if [ "$key" = '' ]; then
 	printf "\n"
 	
 	printf "\033[92m   MANUAL PART \033[0m \n"
-	printf "\033[92m   Please add the settings below to this file /etc/apache2/sites-available/000-default.conf under  \033[0m \n"
+	printf "\033[92m   Please add the settings below to this file /etc/apache2/sites-available/000-default.conf \033[0m \n"
 	
 	printf "
 <Directory /var/www/html/sans/>
         AuthType Basic
-        AuthName "Password Protected Area"
+        AuthName \"Password Protected Area\"
         AuthUserFile /opt/sans/.htpasswd
         Require valid-user
 </Directory>
 "
-	printf "\033[92m   Then issue the restart service command: service apache2 restart \033[0m \n"
+	printf "\033[92m   Then issue the restart service command: \033[0m \n"
+	printf "   service apache2 restart"
 
 else
    printf "/n"
    exit 2
-   printf "/n"
 fi
