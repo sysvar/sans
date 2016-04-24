@@ -25,7 +25,7 @@ class setup:
 
     # MySQL Database
     mysqlServerIP       = '127.0.0.1'
-    mysqlUser           = 'sans'
+    mysqlUser           = 'root'
     mysqlPass           = 'sans'
     mysqlDB             = 'sans'
 

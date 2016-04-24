@@ -34,7 +34,7 @@ if [ "$key" = '' ]; then
 	apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
 	add-apt-repository 'deb [arch=amd64,i386] http://lon1.mirrors.digitalocean.com/mariadb/repo/10.1/debian jessie main'
 	apt-get update
-    apt-get install apache2 php5 phpmyadmin python2.7 software-properties-common mariadb-server -y
+    apt-get install apache2 php5 python2.7 software-properties-common mariadb-server -y
 	chown -R www-data:www-data /opt/sans
 	chmod +x /opt/sans/schedule.sh
 	chmod +x /opt/sans/sans.py
@@ -57,16 +57,25 @@ if [ "$key" = '' ]; then
 	printf "\n"
 	
 	printf "\033[92m   MANUAL PART \033[0m \n"
-	printf "\033[92m   Please add the settings below to this file /etc/apache2/sites-available/000-default.conf \033[0m \n"
+	printf "\033[92m   1. Please add the settings below to this file /etc/apache2/sites-available/000-default.conf \033[0m \n"
 	
 	printf "
 <Directory /var/www/html/sans/>
         AuthType Basic
         AuthName \"Password Protected Area\"
-        AuthUserFile /opt/sans/.htpasswd
+        AuthUserFile /opt/sans/htpasswd
         Require valid-user
 </Directory>
 "
+	printf "\n"
+	printf "\033[92m   2. Please configure htpasswd in /opt/sans/htpasswd - http://www.htaccesstools.com/htpasswd-generator \033[0m \n"
+	
+	printf "\n"
+	printf "\033[92m   3. Set up the configuration in /opt/sans/sans.py (Database, Web, Email) \033[0m \n"
+
+	printf "\n"
+	printf "\033[92m   3. Set up the configuration in /var/www/html/sans/assets/inc/mysqli_connect.php (Web Dashboard) \033[0m \n"
+
 	printf "\n"
 	printf "\033[92m   Then issue the restart service command: \033[0m \n"
 	printf "\n"
