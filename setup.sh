@@ -34,7 +34,7 @@ if [ "$key" = '' ]; then
 	apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
 	add-apt-repository 'deb [arch=amd64,i386] http://lon1.mirrors.digitalocean.com/mariadb/repo/10.1/debian jessie main'
 	apt-get update
-    apt-get install apache2 php5 phpmyadmin python2.7 nohup software-properties-common mariadb-server -y
+    apt-get install apache2 php5 phpmyadmin python2.7 software-properties-common mariadb-server -y
 	chown -R www-data:www-data /opt/sans
 	chmod +x /opt/sans/schedule.sh
 	chmod +x /opt/sans/sans.py
@@ -47,6 +47,7 @@ if [ "$key" = '' ]; then
 	
 	printf "\033[92m   Database, take time to type correctly \033[0m \n"
 	printf "DATABASE 1: Set a high number of database connections /n"
+	printf "\n"
 	mysql -u root -p -e 'set global max_connections = 9999;'
 	printf "\n"
 	printf "DATABASE 2: Create sans database /n"
@@ -68,7 +69,8 @@ if [ "$key" = '' ]; then
 "
 	printf "\n"
 	printf "\033[92m   Then issue the restart service command: \033[0m \n"
-	printf "   service apache2 restart"
+	printf "\n"
+	printf "   service apache2 reload"
 
 else
    printf "/n"
