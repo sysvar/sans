@@ -16,7 +16,7 @@ printf "
     - mariadb
     - phpmyadmin
     - python2.7
-    - nohup
+    - python-mysqldb
 "
 printf "\n"
 printf "\033[91m   The web dashboard will be installed to /var/www/sans \033[0m \n"
@@ -34,7 +34,7 @@ if [ "$key" = '' ]; then
 	apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
 	add-apt-repository 'deb [arch=amd64,i386] http://lon1.mirrors.digitalocean.com/mariadb/repo/10.1/debian jessie main'
 	apt-get update
-    apt-get install apache2 php5 python2.7 software-properties-common mariadb-server -y
+    apt-get install apache2 php5 python2.7 software-properties-common phpmyadmin mariadb-server python-mysqldb -y
 	chown -R www-data:www-data /opt/sans
 	chmod +x /opt/sans/schedule.sh
 	chmod +x /opt/sans/sans.py
@@ -80,6 +80,7 @@ if [ "$key" = '' ]; then
 	printf "\033[92m   Then issue the restart service command: \033[0m \n"
 	printf "\n"
 	printf "   service apache2 reload"
+	printf "\n"
 
 else
    printf "/n"

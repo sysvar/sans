@@ -110,8 +110,8 @@ def probe(targetHost, targetPort, databaseTime):
 
     except Exception, e:
         printLock.acquire()
-        #print colour.RED + '   [-] ' + colour.WHITE + targetHost + ' (' + str(targetPort) + '/tcp) closed, ' + str(e)
-        #print
+        print colour.RED + '   [-] ' + colour.WHITE + targetHost + ' (' + str(targetPort) + '/tcp) closed, ' + str(e)
+        print
         printLock.release()
 
     except socket.error:
