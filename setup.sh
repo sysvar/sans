@@ -31,25 +31,27 @@ read -n1 -r -p "Press SPACE or ENTER to continue otherwise press anything else t
 
 if [ "$key" = '' ]; then
     printf "\033[92m   Setup Initiated... \033[0m \n"
-	
 	apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
 	add-apt-repository 'deb [arch=amd64,i386] http://lon1.mirrors.digitalocean.com/mariadb/repo/10.1/debian jessie main'
 	apt-get update
     apt-get install apache2 php5 phpmyadmin python2.7 nohup software-properties-common mariadb-server -y
-	
 	chown -R www-data:www-data /opt/sans
 	chmod +x /opt/sans/schedule.sh
 	chmod +x /opt/sans/sans.py
 	touch /var/log/sans.log
 	chown -R www-data:www-data /var/log/sans.log
 	echo '0 0 * * *   root     /opt/sans/schedule.sh' > /etc/cron.d/sans
-	
 	mv /opt/sans/sans /var/www/html/
-	
 	sed -i 's:upload_max_filesize = 2M:upload_max_filesize = 10M:g' /etc/php5/apache2/php.ini
+	printf "\n"
 	
-	printf "Set a high number of database connections /n"
+	printf "\033[92m   Database, take time to type correctly \033[0m \n"
+	printf "DATABASE 1: Set a high number of database connections /n"
 	mysql -u root -p -e 'set global max_connections = 9999;'
+	printf "\n"
+	printf "DATABASE 2: Create sans database /n"
+	mysql -u root -p -e 'CREATE DATABASE sans;'
+	printf "DATABASE 3: Import Database /n"
 	mysqldump -u root -p sans < database.sql
 	printf "\n"
 	
