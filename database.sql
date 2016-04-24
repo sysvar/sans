@@ -1,3 +1,4 @@
+CREATE DATABASE sans;
 CREATE TABLE IF NOT EXISTS `scanner`.`service_category` ( `svc_category_id` INT(2) NOT NULL AUTO_INCREMENT, `svc_category` VARCHAR(20) NOT NULL , PRIMARY KEY (`svc_category_id`)) ENGINE = InnoDB CHARSET=utf8 COLLATE=utf8_unicode_ci;
 CREATE TABLE IF NOT EXISTS `scanner`.`service_problem` (`svc_problem_id` int(2) NOT NULL AUTO_INCREMENT,`svc_problem` VARCHAR(20) NOT NULL, PRIMARY KEY (`svc_problem_id`)) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_unicode_ci;
 CREATE TABLE IF NOT EXISTS `scanner`.`service` (`svc_port` int(5) NOT NULL,`svc_acronym` varchar(15) NOT NULL,`svc_service` varchar(30) NOT NULL,`svc_category_id` int(2) NOT NULL,`svc_problem_id` int(2) NOT NULL, PRIMARY KEY (`svc_port`)) ENGINE=InnoDB CHARSET=utf8 COLLATE=utf8_unicode_ci;

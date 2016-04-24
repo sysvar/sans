@@ -64,6 +64,7 @@ if [ "$key" = '' ]; then
         Require valid-user
 </Directory>
 "
+	printf "\n"
 	printf "\033[92m   Then issue the restart service command: \033[0m \n"
 	printf "   service apache2 restart"
 
