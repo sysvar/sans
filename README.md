@@ -12,8 +12,7 @@ This app checks for open ports on a range of targets, if supported (FTP/SSH Only
  - Email Alerting
 
 # Installation
-mkdir -p /opt/sans
-git clone https://github.com/sysvar/sans.git && chmod +x /opt/sans/setup.sh && sudo /opt/sans/setup.sh
+mkdir -p /opt/sans && cd /opt/sans && git clone https://github.com/sysvar/sans.git && chmod +x /opt/sans/setup.sh && sudo /opt/sans/setup.sh
 
 then...
 configure the sans.py configuration section for database, web and email.
@@ -21,7 +20,7 @@ configure the sans.py configuration section for database, web and email.
 # Usage
 Use the web interface scanner page to start scanning and setup schedule.
 
-# Testing (No Database)
+# Usage Testing (No Database)
 This just acts as a port scanner and banner grabber.
 
 python test.py -i <target IP(s)> -p <target port(s)> -t <timeout in seconds> -t <numbers of threads>
