@@ -50,6 +50,7 @@ if [ "$key" = '' ]; then
 	
 	printf "Set a high number of database connections /n"
 	mysql -u root -p -e 'set global max_connections = 9999;'
+	mysqldump -u root -p sans < database.sql
 	printf "\n"
 	
 	printf "\033[92m   MANUAL PART \033[0m \n"
