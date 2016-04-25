@@ -65,7 +65,7 @@ This has been tested on Debian only.
 # Usage
 Use the web interface scanner page to start scanning and setup schedule.
 
-# Usage Testing (No Database)
+# Usage Testing (with no database)
 This just acts as a port scanner and banner grabber.
 
 	python test.py -i <target IP(s)> -p <target port(s)> -t <timeout in seconds> -c <numbers of threads>
