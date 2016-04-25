@@ -13,7 +13,7 @@ printf "\033[91m   This script will install the following software \033[0m"
 printf "
     - apache2
     - php5
-    - mariadb
+    - mysql-server
     - phpmyadmin
     - python2.7
     - python-mysqldb
@@ -31,10 +31,8 @@ read -n1 -r -p "Press SPACE or ENTER to continue otherwise press anything else t
 
 if [ "$key" = '' ]; then
     printf "\033[92mSetup Initiated... \033[0m \n"
-	apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 0xcbcb082a1bb943db
-	add-apt-repository 'deb [arch=amd64,i386] http://lon1.mirrors.digitalocean.com/mariadb/repo/10.1/debian jessie main'
 	apt-get update
-    apt-get install apache2 php5 python2.7 software-properties-common phpmyadmin mariadb-server python-mysqldb -y
+    apt-get install apache2 php5 python2.7 software-properties-common phpmyadmin mysql-server python-mysqldb -y
 	chown -R www-data:www-data /opt/sans
 	chmod +x /opt/sans/schedule.sh
 	chmod +x /opt/sans/sans.py
