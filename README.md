@@ -15,9 +15,11 @@ This app checks for open ports on a range of targets, if supported (FTP/SSH Only
 This has been tested on Debian only.
 
 1. Firstly download and install software
+
 		cd /opt && git clone https://github.com/sysvar/sans.git && cd /opt/sans && chmod +x /opt/sans/setup.sh && /opt/sans/setup.sh
 
-2. Secondly add the password settings below to your web config file /etc/apache2/sites-available/000-default.conf under 'DocumentRoot /var/www/html'
+2. Add the password settings below to your web config file /etc/apache2/sites-available/000-default.conf under 'DocumentRoot /var/www/html'
+
 		<Directory /var/www/html/sans/>
 			AuthType Basic
 			AuthName \"Password Protected Area\"
