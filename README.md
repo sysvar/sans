@@ -73,5 +73,11 @@ This just acts as a port scanner and banner grabber.
 	python test.py -i 192.168.1.1,192.168.1.2 -p 21,22 -t 0.3 -c 10
 	python test.py -I hosts.txt -P ports.txt -t 3 -c 100
 
+# Running in a vmware?
+If your using a high amount of threads for concurrency it tends to kill the vmware NAT service. Keep it below 200 if your using a VM. To restart this service on windows, issue the following commands as an Administrator.
+
+    net stop "VMWare Nat Service"
+    net start "VMWare Nat Service"
+	
 # Disclaimer 
 Please take into account computer laws in your country before running SANS. Scanning with the intent to find and access vulenrable systems is illegal.
