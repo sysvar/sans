@@ -23,7 +23,7 @@ printf "\033[91m   The web dashboard will be installed to /var/www/sans \033[0m 
 printf "\n"
 printf "\033[91m   The application will be installed to /opt/sans \033[0m \n"
 printf "\n"
-printf "\033[91m   A cron job will be installed to /etc/cron.d/sans-cron \033[0m \n"
+printf "\033[91m   A cron job will be installed to /etc/cron.d/sans \033[0m \n"
 printf "\n"
 
 # Check before continuing
