@@ -12,10 +12,22 @@ This app checks for open ports on a range of targets, if supported (FTP/SSH Only
  - Email Alerting
 
 # Installation
-cd /opt && git clone https://github.com/sysvar/sans.git && cd /opt/sans && chmod +x /opt/sans/setup.sh && /opt/sans/setup.sh
+This has been tested on Debian only.
 
-then...
-configure the sans.py configuration section for database, web and email.
+1. Firstly download and install software
+	cd /opt && git clone https://github.com/sysvar/sans.git && cd /opt/sans && chmod +x /opt/sans/setup.sh && /opt/sans/setup.sh
+
+2. Secondly add the password settings below to your web config file /etc/apache2/sites-available/000-default.conf under 'DocumentRoot /var/www/html'
+	<Directory /var/www/html/sans/>
+		AuthType Basic
+		AuthName \"Password Protected Area\"
+		AuthUserFile /opt/sans/htpasswd
+		Require valid-user
+	</Directory>
+	
+3. Configure a htpasswd in /opt/sans/htpasswd, the default one is sans:sans - [htpasswd generator](http://www.htaccesstools.com/htpasswd-generator) 
+
+4. Set up the configuration in /opt/sans/sans.py to reflect your settings:
 
 	class setup:
 		# Please update these variables appropriately
@@ -39,6 +51,17 @@ configure the sans.py configuration section for database, web and email.
 		emailServerPass     = "sans"
 		emailSenderEmail    = 'sans@example.com'
 		emailRecipient      = 'sans@example.com'
+		
+5. Set up the website sql configuration in /var/www/html/sans/assets/inc/mysqli_connect.php
+
+	DEFINE ('DB_USER', 'root');
+	DEFINE ('DB_PASSWORD', 'sans');
+	DEFINE ('DB_HOST', '127.0.0.1');
+	DEFINE ('DB_NAME', 'sans');
+	
+6. Give apache a restart and you should be good to good
+
+	service apache2 reload
 
 # Usage
 Use the web interface scanner page to start scanning and setup schedule.
