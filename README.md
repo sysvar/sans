@@ -23,10 +23,10 @@ Use the web interface scanner page to start scanning and setup schedule.
 # Usage Testing (No Database)
 This just acts as a port scanner and banner grabber.
 
-python test.py -i <target IP(s)> -p <target port(s)> -t <timeout in seconds> -t <numbers of threads>
-       python test.py -i 192.168.1.1 -p 21 -t 1 -c 1
-       python test.py -i 192.168.1.1,192.168.1.2 -p 21,22 -t 0.3 -c 10
-	   python test.py -I hosts.txt -P ports.txt -t 3 -c 100
+python test.py -i <target IP(s)> -p <target port(s)> -t <timeout in seconds> -c <numbers of threads>
+python test.py -i 192.168.1.1 -p 21 -t 1 -c 1
+python test.py -i 192.168.1.1,192.168.1.2 -p 21,22 -t 0.3 -c 10
+python test.py -I hosts.txt -P ports.txt -t 3 -c 100
 
 # Disclaimer 
 Please take into account computer laws in your country before running SANS. Scanning with the intent to find and access vulenrable systems is illegal.
