@@ -409,8 +409,28 @@ input:focus, textarea:focus {
 	}
 }
 
-@media handheld, only screen and (max-width: 1100px) {
+@media handheld, only screen and (max-width: 1530px) {
+    .tot-info { font-size: 35px; }
+	.tot-stat { font-size: 52px; }
+}
+@media handheld, only screen and (max-width: 1362px) {
+    #main-menu > ul > li > a { margin: 0; font-size: 14px; }
+}
+@media handheld, only screen and (max-width: 1300px) {
+    .spacer { height: 0;}
+}
+@media handheld, only screen and (max-width: 1260px) {
     .page-width { padding: 0 15px; }
+	.boxpad { padding: 18px; }
+	.tot-info { font-size: 31px; }
+}
+@media handheld, only screen and (max-width: 1060px) {
+	.boxpad { padding: 10px; }
+	.tot-info { font-size: 20px; }
+	.tot-stat { font-size: 34px; }
+}
+@media handheld, only screen and (max-width: 767px) {
+	#header { height: 120px; }
 }
 @media handheld, only screen and (max-width: 450px) {
     .page-width { padding: 0 10px; }
