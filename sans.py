@@ -199,7 +199,7 @@ def main():
     troubleshooting()
 
     menu = argparse.ArgumentParser(prog='sans.py', description='Useful Swtiches Information',
-                                   usage='python %(prog)s -i <target IP(s)> -p <target port(s)> -t <timeout in seconds>\n'
+                                   usage='python %(prog)s -i <target IP(s)> -p <target port(s)> -t <timeout in seconds> -c <numbers of threads>\n'
                                          '       python %(prog)s -i 192.168.1.1 -p 21 -t 1 -c 1\n'
                                          '       python %(prog)s -i 192.168.1.1,192.168.1.2 -p 21,22 -t 0.3 -c 10',
                                    epilog='Please take into account computer laws in your country before running this program, mass-'
