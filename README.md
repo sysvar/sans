@@ -1,11 +1,11 @@
 # SANS
 Simple Automated Network Scanner
 
-This app checks for open ports on a range of targets, if supported (FTP/SSH Only) it then downloads the associated service banner, and stores all data in the MySQL database. Analytics are performed on the dataset and the results dashboard is accessable via web server.
+This app checks for open ports on a range of targets, if supported (FTP/SSH Only) it then downloads the associated service banner, and stores all data in the SQL database. Analytics are performed on the dataset and the results dashboard is accessable via web server.
 
 # Features
  - Web Interface
- - Seceduled Scanning
+ - Scheduled Scanning
  - Comparision with previous scan
  - Find potentially unwanted services
  - Find potentailly vulnerable services
