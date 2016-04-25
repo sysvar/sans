@@ -426,7 +426,7 @@ input:focus, textarea:focus {
 }
 @media handheld, only screen and (max-width: 1060px) {
 	.boxpad { padding: 10px; }
-	.tot-info { font-size: 20px; }
+    .tot-info { font-size: 20px; line-height: 34px; }
 	.tot-stat { font-size: 34px; }
 }
 @media handheld, only screen and (max-width: 767px) {
