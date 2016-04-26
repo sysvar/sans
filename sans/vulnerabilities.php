@@ -503,8 +503,8 @@
                                               INNER JOIN vulnerability_type
                                                 ON vulnerability.vul_type_id = vulnerability_type.vul_type_id
                                             WHERE banners.scn_id = (SELECT
-                                                MAX(banners.scn_id) AS scanid
-                                              FROM scan s)
+                                                MAX(scn_id) AS scanid
+                                              FROM scan)
                                             GROUP BY vulnerability.vul_port,
                                                      vulnerability.vul_software,
                                                      vulnerability_type.vul_type,
