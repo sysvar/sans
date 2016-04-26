@@ -31,10 +31,12 @@ read -n1 -r -p "Press SPACE or ENTER to continue otherwise press anything else t
 
 if [ "$key" = '' ]; then
     printf "\033[92mSetup Initiated... \033[0m \n"
-	sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
-	sudo add-apt-repository 'deb http://mirror.jmu.edu/pub/mariadb/repo/5.5/ubuntu trusty main'
+	apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xcbcb082a1bb943db
 	apt-get update
-    apt-get install apache2 php5 python2.7 software-properties-common phpmyadmin mariadb-server python-mysqldb -y
+	apt-get install software-properties-common -y
+	add-apt-repository 'deb http://mirror.jmu.edu/pub/mariadb/repo/5.5/ubuntu trusty main'
+	apt-get update
+    apt-get install apache2 php5 python2.7 phpmyadmin mariadb-server python-mysqldb -y
 	chown -R www-data:www-data /opt/sans
 	chmod +x /opt/sans/schedule.sh
 	chmod +x /opt/sans/sans.py
