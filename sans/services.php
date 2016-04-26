@@ -28,7 +28,7 @@
         $array1[] = $row;                               # Store results in array1
     }
 
-    # Finding Hosts with Unwanted Services Yesterday
+    # Finding Hosts with Unwanted Services Today
     $query2 = "
         SELECT
           ports.por_ip AS `IP Address`,

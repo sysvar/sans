@@ -1,6 +1,54 @@
 <?php
     require('./assets/inc/mysqli_connect.php');
 
+    # Finding Hosts with Vulnerable Services Yesterday
+    $query1 = "
+        SELECT
+          banners.por_ip AS Host,
+          banners.por_port AS Port,
+          vulnerability.vul_software AS Software,
+          banners.ban_banner AS Banner
+        FROM banners
+          INNER JOIN vulnerability
+            ON banners.ban_banner = vulnerability.vul_banner
+          INNER JOIN scan
+            ON banners.scn_id = scan.scn_id
+        WHERE scan.scn_date = SUBDATE(CURDATE(), 1)
+        GROUP BY vulnerability.vul_software,
+                 banners.por_port,
+                 banners.ban_banner,
+                 banners.por_ip
+    ";
+
+    $response1 = @mysqli_query($dbc, $query1);          # Store response from database
+    while ($row = mysqli_fetch_array($response1)) {     # Fetch results as array
+        $array1[] = $row;                               # Store results in array1
+    }
+
+    # Finding Hosts with Vulnerable Services Today
+    $query2 = "         
+        SELECT
+          banners.por_ip AS Host,
+          banners.por_port AS Port,
+          vulnerability.vul_software AS Software,
+          banners.ban_banner AS Banner
+        FROM banners
+          INNER JOIN vulnerability
+            ON banners.ban_banner = vulnerability.vul_banner
+          INNER JOIN scan
+            ON banners.scn_id = scan.scn_id
+        WHERE scan.scn_date = CURDATE()
+        GROUP BY vulnerability.vul_software,
+                 banners.por_port,
+                 banners.ban_banner,
+                 banners.por_ip
+    ";
+
+    $response2 = @mysqli_query($dbc, $query2);          # Store response from database
+    while ($row = mysqli_fetch_array($response2)) {     # Fetch results as array
+        $array2[] = $row;                               # Store results in array2
+    }
+
     function check_diff_multi($a1, $a2) {       # Get array 1 and 2
         $result = array();                      # Initialise Output Variable as an array containing all values present in array 1 but absent in array 2
         $i = 0;                                 # Initialise Variable
@@ -584,25 +632,7 @@
                         </div>
                         <div class="content-hosts">
                             <?php
-                                $query = "  
-                                            SELECT
-                                              banners.por_ip AS Host,
-                                              banners.por_port AS Port,
-                                              vulnerability.vul_software AS Software,
-                                              banners.ban_banner AS Banner
-                                            FROM banners
-                                              INNER JOIN vulnerability
-                                                ON banners.ban_banner = vulnerability.vul_banner
-                                              INNER JOIN scan
-                                                ON banners.scn_id = scan.scn_id
-                                            WHERE scan.scn_date = SUBDATE(CURDATE(), 1)
-                                            GROUP BY vulnerability.vul_software,
-                                                     banners.por_port,
-                                                     banners.ban_banner,
-                                                     banners.por_ip
-                                        ";
-                            $response = @mysqli_query($dbc, $query);
-                            if ($response) {
+                            if ($response1) {
                                 echo '<table align="left" cellspacing="6" cellpadding="3">
                                     <tr><td align="left"><b>Host</b></td>
                                     <td align="left"><b>Port</b></td>
@@ -610,8 +640,7 @@
                                     <td align="left"><b>Banner</b></td>';
 
                                 // mysqli_fetch_array will return a row of data from the query until no further data is available
-                                while ($row = mysqli_fetch_array($response)) {
-                                    $array1[] = $row;
+                                foreach ($array1 as $row) {
                                     echo '<tr><td align="left">' .
                                     $row['Host'] . '</td><td align="left">' .
                                     $row['Port'] . '</td><td align="left">' .
@@ -635,25 +664,8 @@
                         </div>
                         <div class="content-hosts">
                             <?php
-                                $query = "  
-                                            SELECT
-                                              banners.por_ip AS Host,
-                                              banners.por_port AS Port,
-                                              vulnerability.vul_software AS Software,
-                                              banners.ban_banner AS Banner
-                                            FROM banners
-                                              INNER JOIN vulnerability
-                                                ON banners.ban_banner = vulnerability.vul_banner
-                                              INNER JOIN scan
-                                                ON banners.scn_id = scan.scn_id
-                                            WHERE scan.scn_date = CURDATE()
-                                            GROUP BY vulnerability.vul_software,
-                                                     banners.por_port,
-                                                     banners.ban_banner,
-                                                     banners.por_ip
-                                            ";
                             $response = @mysqli_query($dbc, $query);
-                            if ($response) {
+                            if ($response2) {
                                 echo '<table align="left" cellspacing="6" cellpadding="3">
                                     <tr><td align="left"><b>Host</b></td>
                                     <td align="left"><b>Port</b></td>
@@ -661,9 +673,7 @@
                                     <td align="left"><b>Banner</b></td>';
 
                                 // mysqli_fetch_array will return a row of data from the query until no further data is available
-                                while ($row = mysqli_fetch_array($response)) {
-                                    $array2[] = $row;
-
+                                foreach ($array2 as $row) {
                                     echo '<tr><td align="left">' .
                                     $row['Host'] . '</td><td align="left">' .
                                     $row['Port'] . '</td><td align="left">' .
